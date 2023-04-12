@@ -99,7 +99,10 @@ stages:
     - task: CmdLine@2
       displayName: Install Newman
       inputs:
-        script:           # ToDo: Write your commands to install newman
+        # ToDo: Write your commands to install newman
+        script: |
+          sudo apt install nodejs npm -y
+          npm install -g newman
         workingDirectory: $(System.DefaultWorkingDirectory)
     # Postman Data Validation Test Suite    
     # ToDo: Verify the working directory and the newman scripts
@@ -107,7 +110,8 @@ stages:
       displayName: Run Data Validation Tests
       continueOnError: true
       inputs:
-        script:           # ToDo: Write your commands
+        # ToDo: Write your commands
+        script: newman run $(System.DefaultWorkingDirectory)/automatedtesting/postman/StarterAPIs.json          
         workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
     # Postman Regression Test Suite    
     # ToDo: Update the command and verify the working directory
@@ -115,7 +119,8 @@ stages:
       displayName: Run Regression Tests
       continueOnError: true
       inputs:
-        script:           # ToDo: Write your commands
+        # ToDo: Write your commands
+        script:
         workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
     # Postman - Publish Results 
     # ToDo: Complete the task as explained here: https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/test/publish-test-results?view=azure-devops&tabs=trx%2Cyaml#yaml-snippet
@@ -123,9 +128,9 @@ stages:
       inputs:
         testResultsFormat: 'JUnit'
         testResultsFiles: '**/TEST-*.xml'
-        searchFolder:       # ToDo
+        searchFolder: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
         mergeTestResults: true
-        testRunTitle:       # ToDo
+        testRunTitle: 'myLab03TestResult'
 
     #--------------------------------------------#
     # Selenium (UI) Test Suite - Archive the package  
