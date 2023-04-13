@@ -101,7 +101,13 @@ stages:
       inputs:
         # ToDo: Write your commands to install newman
         script: |
-          sudo apt install nodejs npm -y
+          wget https://nodejs.org/dist/v18.16.0/node-v18.16.0-linux-x64.tar.xz
+          sudo mkdir -p /usr/local/lib/nodejs
+          sudo tar -xJvf node-v18.16.0-linux-x64.tar.xz -C /usr/local/lib/nodejs
+          echo "export PATH=/usr/local/lib/nodejs/node-v18.16.0-linux-x64/bin:$PATH" >> ~/.profile
+          source ~/.profile
+          node -v
+          npm --version
           npm install -g newman
         workingDirectory: $(System.DefaultWorkingDirectory)
         
@@ -122,7 +128,8 @@ stages:
       continueOnError: true
       inputs:
         # ToDo: Write your commands
-        script:
+        newman run StarterAPIs.json -r junit,cli --reporter-junit-export RegressionTestAPI.json
+        script: newman run StarterAPIs.json -r junit,cli --reporter-junit-export RegressionTestAPI.json
         workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
 
     # Postman - Publish Results 
