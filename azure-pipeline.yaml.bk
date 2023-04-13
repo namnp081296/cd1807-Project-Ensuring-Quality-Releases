@@ -104,6 +104,7 @@ stages:
           sudo apt install nodejs npm -y
           npm install -g newman
         workingDirectory: $(System.DefaultWorkingDirectory)
+        
     # Postman Data Validation Test Suite    
     # ToDo: Verify the working directory and the newman scripts
     - task: CmdLine@2
@@ -113,6 +114,7 @@ stages:
         # ToDo: Write your commands
         script: newman run $(System.DefaultWorkingDirectory)/automatedtesting/postman/StarterAPIs.json          
         workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+
     # Postman Regression Test Suite    
     # ToDo: Update the command and verify the working directory
     - task: CmdLine@2
@@ -122,6 +124,7 @@ stages:
         # ToDo: Write your commands
         script:
         workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+
     # Postman - Publish Results 
     # ToDo: Complete the task as explained here: https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/test/publish-test-results?view=azure-devops&tabs=trx%2Cyaml#yaml-snippet
     - task: PublishTestResults@2
