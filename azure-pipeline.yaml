@@ -33,7 +33,7 @@ stages:
     - task: TerraformInstaller@0
       displayName: 'Terrafom installation'
       inputs:
-        terraformVersion: '1.2.9'
+        terraformVersion: '1.4.4'
     
     # Run Terraform Init on the pipeline agent 
     # ToDo: Replace the resource group name, storage account name, and container name below
@@ -45,7 +45,7 @@ stages:
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         backendServiceArm: '$(azureServiceConnectionId)'
         backendAzureRmResourceGroupName: 'Azuredevops'
-        backendAzureRmStorageAccountName: 'tfstate281845088'
+        backendAzureRmStorageAccountName: 'tfstate942031361'
         backendAzureRmContainerName: 'tfstate'
         backendAzureRmKey: 'test.terraform.tfstate'
 
@@ -183,9 +183,9 @@ stages:
         archiveType: 'zip'
         archiveFile: 
     # JMeter Test Suite - Publish    
-    - publish: 
-      displayName: 
-      artifact: 
+    - publish: $(System.DefaultWorkingDirectory)/automatedtesting/postman
+      displayName: 'Upload PerformanceTestSuite Package'
+      artifact: performance-tests
 
 #--------------------------------------------#  
 # DEPLOYMENT STAGE
@@ -197,8 +197,8 @@ stages:
   # ToDo: Provide <environment name> you created in your DevOps project
   - deployment: FakeRestAPI
     pool:
-      vmImage: 'Ubuntu-18.04'      
-    environment: <environment name>   # ToDo
+      vmImage: 'myLinuxVM-image-20230415113237'      
+    environment: test   # ToDo
     strategy:
       runOnce:
         deploy:
@@ -206,8 +206,8 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Deploy Azure Web App'
             inputs:
-              azureSubscription:      # ToDo
-              appName:                # ToDo
+              azureSubscription: 'd6c8f7f9-b69d-4549-b504-b520b7a8ed88'    # ToDo
+              appName: myApplication               # ToDo
               appType: webApp
               package: $(Pipeline.Workspace)/<artifact>/<archiveFile>       # ToDo: Use the published zip artifact. 
           #--------------------------------------------#    
