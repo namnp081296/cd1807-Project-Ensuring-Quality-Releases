@@ -108,6 +108,7 @@ stages:
           source ~/.profile
           node -v
           npm --version
+          npm install uuid@latest
           npm install -g newman
         workingDirectory: $(System.DefaultWorkingDirectory)
         
