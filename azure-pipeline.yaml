@@ -75,117 +75,117 @@ stages:
     
     # Run Terraform Apply
     # ToDo: Change the workingDirectory path, as applicable to you
-    # - task: TerraformTaskV3@3
-    #   displayName: Terraform apply
-    #   inputs:
-    #     provider: 'azurerm'
-    #     command: 'apply'
-    #     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
-    #     environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
-
-    #ToDo: Change the workingDirectory path, as applicable to you
-    #Destroy the resources in Azure by running a separate pipeline. 
     - task: TerraformTaskV3@3
-      displayName: Terraform destroy
+      displayName: Terraform apply
       inputs:
         provider: 'azurerm'
-        command: 'destroy'
+        command: 'apply'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
 
-# #--------------------------------------------#    
-#     # Postman - Install Newman    
-#     # ToDo: Update the command and verify the working directory
-#     - task: CmdLine@2
-#       displayName: Install Newman
-#       inputs:
-#         # ToDo: Write your commands to install newman
-#         script: |
-#           wget https://nodejs.org/dist/v18.16.0/node-v18.16.0-linux-x64.tar.xz
-#           sudo mkdir -p /usr/local/lib/nodejs
-#           sudo tar -xJvf node-v18.16.0-linux-x64.tar.xz -C /usr/local/lib/nodejs
-#           echo "export PATH=/usr/local/lib/nodejs/node-v18.16.0-linux-x64/bin:$PATH" >> ~/.profile
-#           source ~/.profile
-#           node -v
-#           npm --version
-#           npm install uuid@latest
-#           npm install -g newman
-#         workingDirectory: $(System.DefaultWorkingDirectory)
+    #ToDo: Change the workingDirectory path, as applicable to you
+    #Destroy the resources in Azure by running a separate pipeline. 
+    # - task: TerraformTaskV3@3
+    #   displayName: Terraform destroy
+    #   inputs:
+    #     provider: 'azurerm'
+    #     command: 'destroy'
+    #     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
+    #     environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
+
+#--------------------------------------------#    
+    # Postman - Install Newman    
+    # ToDo: Update the command and verify the working directory
+    - task: CmdLine@2
+      displayName: Install Newman
+      inputs:
+        # ToDo: Write your commands to install newman
+        script: |
+          wget https://nodejs.org/dist/v18.16.0/node-v18.16.0-linux-x64.tar.xz
+          sudo mkdir -p /usr/local/lib/nodejs
+          sudo tar -xJvf node-v18.16.0-linux-x64.tar.xz -C $(System.DefaultWorkingDirectory)
+          echo "export PATH=$(System.DefaultWorkingDirectory)/node-v18.16.0-linux-x64/bin:$PATH" >> ~/.profile
+          source ~/.profile
+          node -v
+          npm --version
+          npm install uuid@latest
+          npm install -g newman
+        workingDirectory: $(System.DefaultWorkingDirectory)
         
-#     # Postman Data Validation Test Suite    
-#     # ToDo: Verify the working directory and the newman scripts
-#     - task: CmdLine@2
-#       displayName: Run Data Validation Tests
-#       continueOnError: true
-#       inputs:
-#         # ToDo: Write your commands
-#         script: newman run $(System.DefaultWorkingDirectory)/automatedtesting/postman/StarterAPIs.json          
-#         workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+    # Postman Data Validation Test Suite    
+    # ToDo: Verify the working directory and the newman scripts
+    - task: CmdLine@2
+      displayName: Run Data Validation Tests
+      continueOnError: true
+      inputs:
+        # ToDo: Write your commands
+        script: newman run $(System.DefaultWorkingDirectory)/automatedtesting/postman/StarterAPIs.json          
+        workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
 
-#     # Postman Regression Test Suite    
-#     # ToDo: Update the command and verify the working directory
-#     - task: CmdLine@2
-#       displayName: Run Regression Tests
-#       continueOnError: true
-#       inputs:
-#         # ToDo: Write your commands
-#         script: newman run StarterAPIs.json -r junit,cli --reporter-junit-export TEST-Regression.xml
-#         workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+    # Postman Regression Test Suite    
+    # ToDo: Update the command and verify the working directory
+    - task: CmdLine@2
+      displayName: Run Regression Tests
+      continueOnError: true
+      inputs:
+        # ToDo: Write your commands
+        script: newman run StarterAPIs.json -r junit,cli --reporter-junit-export TEST-Regression.xml
+        workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
 
-#     # Postman - Publish Results 
-#     # ToDo: Complete the task as explained here: https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/test/publish-test-results?view=azure-devops&tabs=trx%2Cyaml#yaml-snippet
-#     - task: PublishTestResults@2
-#       inputs:
-#         testResultsFormat: 'JUnit'
-#         testResultsFiles: '**/TEST-*.xml'
-#         searchFolder: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
-#         mergeTestResults: true
-#         testRunTitle: 'myLab03TestResult'
+    # Postman - Publish Results 
+    # ToDo: Complete the task as explained here: https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/test/publish-test-results?view=azure-devops&tabs=trx%2Cyaml#yaml-snippet
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: '**/TEST-*.xml'
+        searchFolder: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+        mergeTestResults: true
+        testRunTitle: 'myLab03TestResult'
 
-#     #--------------------------------------------#
-#     # Selenium (UI) Test Suite - Archive the package  
-#     # "ArchiveFiles@2" picks up the web package and archives it.
-#     - task: ArchiveFiles@2
-#       displayName: 'Archive UI Tests'
-#       inputs:
-#         rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automatedtesting/selenium'
-#         includeRootFolder: false
-#         archiveType: 'zip'
-#         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-uitests.zip'
-#     # Selenium Test Suite - Publish the package  
-#     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-uitests.zip   # Same as the archiveFile artifact above. 
-#       displayName: 'Upload Package'
-#       artifact: drop-uitests
+    #--------------------------------------------#
+    # Selenium (UI) Test Suite - Archive the package  
+    # "ArchiveFiles@2" picks up the web package and archives it.
+    - task: ArchiveFiles@2
+      displayName: 'Archive UI Tests'
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automatedtesting/selenium'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-uitests.zip'
+    # Selenium Test Suite - Publish the package  
+    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-uitests.zip   # Same as the archiveFile artifact above. 
+      displayName: 'Upload Package'
+      artifact: drop-uitests
 
-#     #--------------------------------------------#    
-#     # FakeRestAPI - Archive
-#     # ToDo: Complete the ArchiveFiles@2 task and publish step 
-#     - task: ArchiveFiles@2
-#       displayName: 'Archive FakeRestAPI'
-#       inputs:
-#         rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter/fakerestapi'
-#         includeRootFolder: false
-#         archiveType: 'zip'
-#         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-apitests.zip'
-#     # FakeRestAPI - Publish    
-#     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-apitests.zip
-#       displayName: 'Upload FakeRestAPI Package'
-#       artifact: fakerestapi-tests
+    #--------------------------------------------#    
+    # FakeRestAPI - Archive
+    # ToDo: Complete the ArchiveFiles@2 task and publish step 
+    - task: ArchiveFiles@2
+      displayName: 'Archive FakeRestAPI'
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter/fakerestapi'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-apitests.zip'
+    # FakeRestAPI - Publish    
+    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-apitests.zip
+      displayName: 'Upload FakeRestAPI Package'
+      artifact: fakerestapi-tests
 
-#     #--------------------------------------------#  
-#     # JMeter (Performance) Test Suite - Archive
-#     # ToDo: Complete the ArchiveFiles@2 task and publish step 
-#     - task: ArchiveFiles@2
-#       displayName: 'Archive PerformanceTestSuite'
-#       inputs:
-#         rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
-#         includeRootFolder: false
-#         archiveType: 'zip'
-#         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-jmetertest.zip'
-#     # JMeter Test Suite - Publish    
-#     - publish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-jmetertest.zip'
-#       displayName: 'Upload PerformanceTestSuite Package'
-#       artifact: performance-tests
+    #--------------------------------------------#  
+    # JMeter (Performance) Test Suite - Archive
+    # ToDo: Complete the ArchiveFiles@2 task and publish step 
+    - task: ArchiveFiles@2
+      displayName: 'Archive PerformanceTestSuite'
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-jmetertest.zip'
+    # JMeter Test Suite - Publish    
+    - publish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-jmetertest.zip'
+      displayName: 'Upload PerformanceTestSuite Package'
+      artifact: performance-tests
 
 # #--------------------------------------------#  
 # # DEPLOYMENT STAGE
