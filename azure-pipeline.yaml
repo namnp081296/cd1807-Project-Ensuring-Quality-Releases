@@ -91,6 +91,7 @@ stages:
           sudo rm -f /usr/bin/node
           sudo rm -f /usr/bin/npm
           sudo rm -f /usr/bin/newman
+          sudo rm -f /usr/bin/jmeter
     #ToDo: Change the workingDirectory path, as applicable to you
     #Destroy the resources in Azure by running a separate pipeline. 
     - task: TerraformTaskV3@3
@@ -224,8 +225,28 @@ stages:
 #           # ToDo: Generate the log file. 
 #           - task: CmdLine@2
 #             inputs:
+#               # ToDo: Write your commands
 #               script: |
-#                                                                             # ToDo: Write your commands
+#                 echo "===== Install Java ====="
+#                 sudo apt install default-jre
+#                 sudo apt install default-jdk
+#                 echo "===== Verify Java Installation ====="
+#                 java -version
+#                 echo "===== Download && Setup JMeter ====="
+#                 curl -O https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.5.tgz
+#                 tar -xvf apache-jmeter-5.5.tgz
+#                 cd apache-jmeter-5.5/lib
+#                 curl -O https://repo1.maven.org/maven2/kg/apc/cmdrunner/2.3/cmdrunner-2.3.jar
+#                 cd ext/
+#                 curl -O https://repo1.maven.org/maven2/kg/apc/jmeter-plugins-manager/1.9/jmeter-plugins-manager-1.9.jar
+#                 cd ../
+#                 java -jar cmdrunner-2.3.jar --tool org.jmeterplugins.repository.PluginManagerCMD install-all-except jpgc-hadoop,jpgc-oauth,ulp-jmeter-autocorrelator-plugin,ulp-jmeter-videostreaming-plugin,ulp-jmeter-gwt-plugin,tilln-iso8583
+#                 echo "===== Verify Installation ====="
+#                 echo -e "JMETER_HOME=\"$(System.DefaultWorkingDirectory)/apache-jmeter-5.3\"\nPATH=\"$JMETER_HOME/bin:$PATH\"" >> ~/.profile
+#                 source ~/.profile && cat ~/.profile
+#                 sudo ln -s $(System.DefaultWorkingDirectory)/apache-jmeter-5.3/bin/jmeter /usr/bin/jmeter
+#                 jmeter --version
+#                                                            
 #               workingDirectory: $(Pipeline.Workspace)/<artifact>            # ToDo: Use the artifact name from the task above
               
 #   #--------------------------------------------#  
@@ -247,7 +268,7 @@ stages:
 #           - task: Bash@3
 #             inputs:
 #               targetType: 'inline'
-#               script: |           
+#               script: |            
 #                 # ToDo: Install Selenium, Chromium-browser & Chromedriver, if not already in the custom VM image. 
 #                 #! /bin/bash
                 
