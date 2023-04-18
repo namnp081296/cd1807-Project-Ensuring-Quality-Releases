@@ -216,7 +216,7 @@ stages:
             displayName: 'Deploy Azure Web App'
             inputs:
               # ToDo
-              azureSubscription: 0fadec41-9b39-430f-aa5d-ce7b49f9346c
+              azureSubscription: '0fadec41-9b39-430f-aa5d-ce7b49f9346c'
               # ToDo
               appName: myApplication
               appType: webApp
