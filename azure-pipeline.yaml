@@ -83,7 +83,7 @@ stages:
         provider: 'azurerm'
         command: 'apply'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
-        environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
+        environmentServiceNameAzureRM: $(azureServiceConnectionId)
 
     # - task: CmdLine@2
     #   displayName: Remove symlink before destroy
