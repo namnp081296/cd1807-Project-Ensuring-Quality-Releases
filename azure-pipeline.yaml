@@ -229,7 +229,7 @@ stages:
             displayName: 'Deploy Azure Web App'
             inputs:
               # ToDo
-              azureSubscription: $(azureSubscription)
+              azureSubscription: $(azureServiceConnectionId)
               # ToDo
               appName: myApplication
               appType: webApp
