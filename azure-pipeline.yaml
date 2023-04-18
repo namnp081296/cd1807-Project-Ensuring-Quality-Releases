@@ -215,10 +215,13 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Deploy Azure Web App'
             inputs:
-              azureSubscription: 0fadec41-9b39-430f-aa5d-ce7b49f9346c    # ToDo
-              appName: myApplication               # ToDo
+              # ToDo
+              azureSubscription: 0fadec41-9b39-430f-aa5d-ce7b49f9346c
+              # ToDo
+              appName: myApplication
               appType: webApp
-              package: $(Pipeline.Workspace)/fakerestapi-tests/$(Build.BuildId)-apitests.zip       # ToDo: Use the published zip artifact. 
+              # ToDo: Use the published zip artifact.
+              package: $(Pipeline.Workspace)/fakerestapi-tests/$(Build.BuildId)-apitests.zip
           #--------------------------------------------#    
           # Run JMeter test suite against the App Service
           # ToDo: Update the script below to install jmeter, unzip the jmeter test suite published zip artifact, 
