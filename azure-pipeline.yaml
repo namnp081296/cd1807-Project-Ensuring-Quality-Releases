@@ -209,9 +209,9 @@ stages:
       displayName: 'Upload PerformanceTestSuite Package'
       artifact: performance-tests
 
---------------------------------------------#  
-DEPLOYMENT STAGE
---------------------------------------------#    
+# --------------------------------------------#  
+# DEPLOYMENT STAGE
+# --------------------------------------------#    
 - stage: Deploy
   jobs:
   #--------------------------------------------#  
