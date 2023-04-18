@@ -201,57 +201,57 @@ stages:
 #--------------------------------------------#  
 # DEPLOYMENT STAGE
 #--------------------------------------------#    
-- stage: Deploy
-  jobs:
-  #--------------------------------------------#  
-  # Deploy FakeRestAPI Web App
-  # ToDo: Provide <environment name> you created in your DevOps project
-  - deployment: FakeRestAPI
-    pool:
-      vmImage: 'myLinuxVM-image-20230418143714'      
-    environment: test   # ToDo
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: AzureWebApp@1
-            displayName: 'Deploy Azure Web App'
-            inputs:
-              # ToDo
-              azureSubscription: $(azureSubscription)
-              # ToDo
-              appName: myApplication
-              appType: webApp
-              # ToDo: Use the published zip artifact.
-              package: $(Pipeline.Workspace)/fakerestapi-tests/$(Build.BuildId)-apitests.zip
-          #--------------------------------------------#    
-          # Run JMeter test suite against the App Services
-          # ToDo: Update the script below to install jmeter, unzip the jmeter test suite published zip artifact, 
-          # and run the PerformanceTestSuite.  
-          # ToDo: Generate the log file. 
-          - task: CmdLine@2
-            inputs:
-              # ToDo: Write your commands
-              script: |
-                echo "===== Install Java ====="
-                sudo apt install default-jre
-                sudo apt install default-jdk
-                echo "===== Verify Java Installation ====="
-                java -version
-                echo "===== Download && Setup JMeter ====="
-                curl -O https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.5.tgz
-                tar -xvf apache-jmeter-5.5.tgz
-                cd apache-jmeter-5.5/lib
-                curl -O https://repo1.maven.org/maven2/kg/apc/cmdrunner/2.3/cmdrunner-2.3.jar
-                cd ext/
-                curl -O https://repo1.maven.org/maven2/kg/apc/jmeter-plugins-manager/1.9/jmeter-plugins-manager-1.9.jar
-                cd ../
-                java -jar cmdrunner-2.3.jar --tool org.jmeterplugins.repository.PluginManagerCMD install-all-except jpgc-hadoop,jpgc-oauth,ulp-jmeter-autocorrelator-plugin,ulp-jmeter-videostreaming-plugin,ulp-jmeter-gwt-plugin,tilln-iso8583
-                echo "===== Verify Installation ====="
-                sudo ln -s $(System.DefaultWorkingDirectory)/apache-jmeter-5.3/bin/jmeter /usr/bin/jmeter
-                jmeter --version
+# - stage: Deploy
+#   jobs:
+#   #--------------------------------------------#  
+#   # Deploy FakeRestAPI Web App
+#   # ToDo: Provide <environment name> you created in your DevOps project
+#   - deployment: FakeRestAPI
+#     pool:
+#       vmImage: 'myLinuxVM-image-20230418143714'      
+#     environment: test   # ToDo
+#     strategy:
+#       runOnce:
+#         deploy:
+#           steps:
+#           - task: AzureWebApp@1
+#             displayName: 'Deploy Azure Web App'
+#             inputs:
+#               # ToDo
+#               azureSubscription: $(azureSubscription)
+#               # ToDo
+#               appName: myApplication
+#               appType: webApp
+#               # ToDo: Use the published zip artifact.
+#               package: $(Pipeline.Workspace)/fakerestapi-tests/$(Build.BuildId)-apitests.zip
+#           #--------------------------------------------#    
+#           # Run JMeter test suite against the App Services
+#           # ToDo: Update the script below to install jmeter, unzip the jmeter test suite published zip artifact, 
+#           # and run the PerformanceTestSuite.  
+#           # ToDo: Generate the log file. 
+#           - task: CmdLine@2
+#             inputs:
+#               # ToDo: Write your commands
+#               script: |
+#                 echo "===== Install Java ====="
+#                 sudo apt install default-jre
+#                 sudo apt install default-jdk
+#                 echo "===== Verify Java Installation ====="
+#                 java -version
+#                 echo "===== Download && Setup JMeter ====="
+#                 curl -O https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.5.tgz
+#                 tar -xvf apache-jmeter-5.5.tgz
+#                 cd apache-jmeter-5.5/lib
+#                 curl -O https://repo1.maven.org/maven2/kg/apc/cmdrunner/2.3/cmdrunner-2.3.jar
+#                 cd ext/
+#                 curl -O https://repo1.maven.org/maven2/kg/apc/jmeter-plugins-manager/1.9/jmeter-plugins-manager-1.9.jar
+#                 cd ../
+#                 java -jar cmdrunner-2.3.jar --tool org.jmeterplugins.repository.PluginManagerCMD install-all-except jpgc-hadoop,jpgc-oauth,ulp-jmeter-autocorrelator-plugin,ulp-jmeter-videostreaming-plugin,ulp-jmeter-gwt-plugin,tilln-iso8583
+#                 echo "===== Verify Installation ====="
+#                 sudo ln -s $(System.DefaultWorkingDirectory)/apache-jmeter-5.3/bin/jmeter /usr/bin/jmeter
+#                 jmeter --version
                                                            
-              workingDirectory: $(Pipeline.Workspace)/fakerestapi-tests            # ToDo: Use the artifact name from the task above
+#               workingDirectory: $(Pipeline.Workspace)/fakerestapi-tests            # ToDo: Use the artifact name from the task above
               
 #   #--------------------------------------------#  
 #   # Selenium | Functional UI Tests
