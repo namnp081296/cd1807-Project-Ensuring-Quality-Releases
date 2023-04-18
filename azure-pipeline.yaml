@@ -225,7 +225,7 @@ stages:
               # ToDo: Use the published zip artifact.
               package: $(Pipeline.Workspace)/fakerestapi-tests/$(Build.BuildId)-apitests.zip
           #--------------------------------------------#    
-          # Run JMeter test suite against the App Service
+          # Run JMeter test suite against the App Services
           # ToDo: Update the script below to install jmeter, unzip the jmeter test suite published zip artifact, 
           # and run the PerformanceTestSuite.  
           # ToDo: Generate the log file. 
