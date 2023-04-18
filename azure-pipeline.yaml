@@ -45,7 +45,7 @@ stages:
         provider: 'azurerm'
         command: 'init'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
-        backendServiceArm: '$(azureServiceConnectionId)'
+        backendServiceArm: $(azureServiceConnectionId)
         backendAzureRmResourceGroupName: 'Azuredevops'
         backendAzureRmStorageAccountName: 'tfstate122573651'
         backendAzureRmContainerName: 'tfstate'
@@ -102,7 +102,7 @@ stages:
     #     provider: 'azurerm'
     #     command: 'destroy'
     #     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
-    #     environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
+    #     environmentServiceNameAzureRM: $(azureServiceConnectionId)
 
 #--------------------------------------------#    
     # Postman - Install Newman    
