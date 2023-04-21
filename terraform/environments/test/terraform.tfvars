@@ -7,7 +7,7 @@ client_secret = "moP8Q~E6AtE0-OYQniAf1y5N9dfVdw_Ts8pLQbsl"
 # Resource Group/Location
 location = "East US"
 resource_group_name = "Azuredevops"
-application_type = "mynewApplication"
+application_type = "myApplication"
 
 # Network
 virtual_network_name = ""
