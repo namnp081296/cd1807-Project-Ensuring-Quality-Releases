@@ -45,7 +45,7 @@ stages:
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         backendServiceArm: '$(azureServiceConnectionId)'
         backendAzureRmResourceGroupName: 'Azuredevops'
-        backendAzureRmStorageAccountName: 'tfstate583010968'
+        backendAzureRmStorageAccountName: 'tfstate2470922105'
         backendAzureRmContainerName: 'tfstate'
         backendAzureRmKey: 'test.terraform.tfstate'
 
@@ -217,7 +217,7 @@ stages:
   # ToDo: Provide <environment name> you created in your DevOps project
   - deployment: FakeRestAPI
     pool:
-      vmImage: 'myLinuxVM-image-20230419101725'      
+      vmImage: 'myLinuxVM-image-20230421083655'      
     environment: 
       name: test   # ToDo
       resourceType: VirtualMachine
@@ -265,7 +265,7 @@ stages:
                 ls -la $(Pipeline.Workspace)/performance-tests/
                 echo "===== Unzip Folder ====="
                 cd $(Pipeline.Workspace)/performance-tests/
-                unzip $(Build.BuildId)-jmetertest.zip -d .
+                unzip $(Build.BuildId)-jmetertest.zip -d $(Pipeline.Workspace)/performance-tests/$(Build.BuildId)-jmetertest
                 echo "===== Run Performance Test Suite ====="
                 jmeter -n -t Starter.jmx -l Starter-log.jtl
               # ToDo: Use the artifact name from the task above
