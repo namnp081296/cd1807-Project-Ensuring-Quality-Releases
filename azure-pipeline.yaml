@@ -280,8 +280,10 @@ stages:
   # ToDo: 
   - deployment: VMDeploy
     displayName: Selenium Tests
-    dependsOn: Deploy
+    dependsOn: FakeRestAPI
     condition: succeeded()
+    pool:
+      vmImage: 'myLinuxVM-image-20230424092105'
     environment:
       name: test        # ToDo: Change/provide a name
       resourceType: VirtualMachine
