@@ -5,7 +5,7 @@ client_id = "a62a2066-9ae7-4d47-a1f6-d1ba71485701"
 client_secret = "GrI8Q~vFbbeIDeQjnMuAgL0cssTi3cDacS3gSdh7"
 
 # Resource Group/Location
-location = "East US"
+location = "South Central US"
 resource_group_name = "Azuredevops"
 application_type = "myApplication"
 
