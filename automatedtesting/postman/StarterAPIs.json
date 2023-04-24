@@ -13,7 +13,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Successful response\", function () {",
-							"    pm.expect(pm.response.text()).to.include(\"janet.weaver@reqres.in\");",
+							"    pm.expect(pm.response.text()).to.include(\"charles.morris@reqres.in\");",
 							"});",
 							""
 						],
