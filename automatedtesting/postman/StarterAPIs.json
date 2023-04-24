@@ -25,7 +25,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://reqres.in/api/users/1",
+					"raw": "https://reqres.in/api/users/5",
 					"protocol": "https",
 					"host": [
 						"reqres",
@@ -34,7 +34,7 @@
 					"path": [
 						"api",
 						"users",
-						"1"
+						"5"
 					]
 				}
 			},

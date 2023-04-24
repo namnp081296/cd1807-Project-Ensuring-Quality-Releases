@@ -73,84 +73,84 @@ stages:
     #   secureFile: 
 
     
-    # # Run Terraform Apply
-    # # ToDo: Change the workingDirectory path, as applicable to you
-    # - task: TerraformTaskV3@3
-    #   displayName: Terraform apply
-    #   inputs:
-    #     provider: 'azurerm'
-    #     command: 'apply'
-    #     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
-    #     environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
-
-    # Remove symlink before destroy
-    - task: CmdLine@2
-      displayName: Remove symlink before destroy
-      inputs:
-        script: |
-          echo "===== Remove Symlink ====="
-          sudo rm -f /usr/bin/node
-          sudo rm -f /usr/bin/npm
-          sudo rm -f /usr/bin/newman
-          sudo rm -f /usr/bin/jmeter
-    #ToDo: Change the workingDirectory path, as applicable to you
-    #Destroy the resources in Azure by running a separate pipeline. 
+    # Run Terraform Apply
+    # ToDo: Change the workingDirectory path, as applicable to you
     - task: TerraformTaskV3@3
-      displayName: Terraform destroy
+      displayName: Terraform apply
       inputs:
         provider: 'azurerm'
-        command: 'destroy'
+        command: 'apply'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
 
-# #--------------------------------------------#
-#     # Postman - Install Newman    
-#     # ToDo: Update the command and verify the working directory
-#     - task: CmdLine@2
-#       displayName: Install Newman
-#       inputs:
-#         # ToDo: Write your commands to install newman
-#         script: |
-#           wget https://nodejs.org/dist/v18.16.0/node-v18.16.0-linux-x64.tar.xz
-#           sudo tar -xJvf node-v18.16.0-linux-x64.tar.xz -C $(System.DefaultWorkingDirectory)
-#           echo "export PATH=$(System.DefaultWorkingDirectory)/node-v18.16.0-linux-x64/bin:$PATH" >> ~/.profile
-#           source ~/.profile
-#           echo "===== Upgrade NPM ====="
-#           npm install -g npm@latest
-#           echo "===== Upgrade UUID ====="
-#           npm install -g uuid@latest
-#           echo "===== Install Newman  ====="
-#           npm install -g newman
-#           echo "===== Create symlink for node, npm and new man ====="
-#           sudo ln -s $(System.DefaultWorkingDirectory)/node-v18.16.0-linux-x64/bin/node /usr/bin/node
-#           sudo ln -s $(System.DefaultWorkingDirectory)/node-v18.16.0-linux-x64/bin/npm /usr/bin/npm
-#           sudo ln -s $(System.DefaultWorkingDirectory)/node-v18.16.0-linux-x64/bin/newman /usr/bin/newman
-#           echo "===== Verify Installation ====="
-#           node -v
-#           npm -v
-#           newman -v
-#         workingDirectory: $(System.DefaultWorkingDirectory)
-        
-#     # Postman Data Validation Test Suite    
-#     # ToDo: Verify the working directory and the newman scripts
-#     - task: CmdLine@2
-#       displayName: Run Data Validation Tests
-#       continueOnError: true
-#       inputs:
-#         # ToDo: Write your commands
-#         script: |
-#           newman run $(System.DefaultWorkingDirectory)/automatedtesting/postman/StarterAPIs.json          
-#         workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+    # # Remove symlink before destroy
+    # - task: CmdLine@2
+    #   displayName: Remove symlink before destroy
+    #   inputs:
+    #     script: |
+    #       echo "===== Remove Symlink ====="
+    #       sudo rm -f /usr/bin/node
+    #       sudo rm -f /usr/bin/npm
+    #       sudo rm -f /usr/bin/newman
+    #       sudo rm -f /usr/bin/jmeter
+    # #ToDo: Change the workingDirectory path, as applicable to you
+    # #Destroy the resources in Azure by running a separate pipeline. 
+    # - task: TerraformTaskV3@3
+    #   displayName: Terraform destroy
+    #   inputs:
+    #     provider: 'azurerm'
+    #     command: 'destroy'
+    #     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
+    #     environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
 
-#     # Postman Regression Test Suite    
-#     # ToDo: Update the command and verify the working directory
-#     - task: CmdLine@2
-#       displayName: Run Regression Tests
-#       continueOnError: true
-#       inputs:
-#         # ToDo: Write your commands
-#         script: newman run $(System.DefaultWorkingDirectory)/automatedtesting/postman/RegressionTest.json -r junit,cli --reporter-junit-export TEST-Regression.xml
-#         workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+#--------------------------------------------#
+    # Postman - Install Newman    
+    # ToDo: Update the command and verify the working directory
+    - task: CmdLine@2
+      displayName: Install Newman
+      inputs:
+        # ToDo: Write your commands to install newman
+        script: |
+          wget https://nodejs.org/dist/v18.16.0/node-v18.16.0-linux-x64.tar.xz
+          sudo tar -xJvf node-v18.16.0-linux-x64.tar.xz -C $(System.DefaultWorkingDirectory)
+          echo "export PATH=$(System.DefaultWorkingDirectory)/node-v18.16.0-linux-x64/bin:$PATH" >> ~/.profile
+          source ~/.profile
+          echo "===== Upgrade NPM ====="
+          npm install -g npm@latest
+          echo "===== Upgrade UUID ====="
+          npm install -g uuid@latest
+          echo "===== Install Newman  ====="
+          npm install -g newman
+          echo "===== Create symlink for node, npm and new man ====="
+          sudo ln -s $(System.DefaultWorkingDirectory)/node-v18.16.0-linux-x64/bin/node /usr/bin/node
+          sudo ln -s $(System.DefaultWorkingDirectory)/node-v18.16.0-linux-x64/bin/npm /usr/bin/npm
+          sudo ln -s $(System.DefaultWorkingDirectory)/node-v18.16.0-linux-x64/bin/newman /usr/bin/newman
+          echo "===== Verify Installation ====="
+          node -v
+          npm -v
+          newman -v
+        workingDirectory: $(System.DefaultWorkingDirectory)
+        
+    # Postman Data Validation Test Suite    
+    # ToDo: Verify the working directory and the newman scripts
+    - task: CmdLine@2
+      displayName: Run Data Validation Tests
+      continueOnError: true
+      inputs:
+        # ToDo: Write your commands
+        script: |
+          newman run $(System.DefaultWorkingDirectory)/automatedtesting/postman/StarterAPIs.json          
+        workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+
+    # Postman Regression Test Suite    
+    # ToDo: Update the command and verify the working directory
+    - task: CmdLine@2
+      displayName: Run Regression Tests
+      continueOnError: true
+      inputs:
+        # ToDo: Write your commands
+        script: newman run $(System.DefaultWorkingDirectory)/automatedtesting/postman/RegressionTest.json -r junit,cli --reporter-junit-export TEST-Regression.xml
+        workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
 
 #     # Postman - Publish Results 
 #     # ToDo: Complete the task as explained here: https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/test/publish-test-results?view=azure-devops&tabs=trx%2Cyaml#yaml-snippet
