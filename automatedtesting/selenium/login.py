@@ -26,7 +26,7 @@ def login (user, password):
     # print('INFO: Successfully logged in as ' + user )
     logging.info('Successfully logged in as ' + user)
 
-def add_to_cart():
+def add_all():
     # print('INFO: Adding all 6 items to cart')
     logging.info('Adding all 6 items to cart')
     items = driver.find_elements_by_css_selector("button.btn_primary.btn_inventory")
@@ -40,7 +40,7 @@ def add_to_cart():
     assert cart_label == '6'
 
 
-def remove_from_cart():
+def remove_all():
     driver.find_element_by_css_selector("a[class='shopping_cart_link']").click()
     # print('INFO: Removing all 6 items to cart')
     logging.info('Removing all 6 items to cart')
@@ -54,5 +54,5 @@ def remove_from_cart():
     
 
 login('standard_user', 'secret_sauce')
-add_to_cart()
-remove_from_cart()
+add_all()
+remove_all()
