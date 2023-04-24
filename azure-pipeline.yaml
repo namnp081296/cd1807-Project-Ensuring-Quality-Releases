@@ -302,11 +302,18 @@ stages:
 #                 sudo apt-get install python3-pip -y
 #                 sudo apt-get install unzip -y
 #                 sudo apt-get install -y chromium-browser
+#                 wget https://chromedriver.storage.googleapis.com/112.0.5615.49/chromedriver_linux64.zip
+#                 unzip chromedriver_linux64.zip
+#                 sudo cp chromedriver /usr/bin
 #                 pip3 install selenium
                 
 #                 #  ToDo: Add chromedriver executable to path
-#                 export PATH=$PATH:/path/to/chromedriver     
+#                 export PATH=$PATH:/usr/bin/chromedriver
                 
 #                 # ToDo: Write commands for deploying the UI Test Suite (published zip artifact) to the linux VM and execute the Test Suite
+#                 cd $(Pipeline.Workspace)/drop-uitests/
+#                 unzip $(Build.BuildId)-uitests.zip -d $(Build.BuildId)-uitests
+#                 cd $(Build.BuildId)-uitests
+#                 python3 login.py
 #                 # ToDo: Direct the output of the Selenium Test Suite to a log file
-                
+#               workingDirectory: $(Pipeline.Workspace)/drop-uitests/  
