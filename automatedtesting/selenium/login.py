@@ -3,14 +3,19 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.common.by import By
 import warnings
-warnings.filterwarnings("ignore", category=DeprecationWarning) 
 import logging
+
+# Turn off all warning output
+warnings.filterwarnings("ignore", category=DeprecationWarning) 
+
+# Setup output log format
 logging.basicConfig(
     format='%(asctime)s %(levelname)-8s %(message)s',
     level=logging.INFO,
     datefmt='%Y-%m-%d %H:%M:%S')
 
 options = ChromeOptions()
+# Will run selenium with non GUI, just output the result log
 options.add_argument("--no-sandbox")
 options.add_argument("--headless") 
 options.add_argument("--disable-dev-shm-usage")
@@ -19,6 +24,7 @@ options.add_argument("--disable-extensions")
 options.add_argument('--remote-debugging-port=9999')
 driver = webdriver.Chrome(options=options)
 
+# 
 logging.info('Browser started successfully. Navigating to the demo page to login.')
 driver.get('https://www.saucedemo.com/')
 
@@ -33,12 +39,14 @@ def login (user, password):
 # Add all item to cart
 def add_all():
     logging.info('Adding all 6 items to cart')
+    # Get all element with attribute btn_inventory
     items = driver.find_elements(By.CSS_SELECTOR, "button.btn_primary.btn_inventory")
 
     for item in items:
         product = item.get_property("name")
-        logging.info(product + ' added to the cart')
+        logging.info(product + ' has been added to the cart')
         item.click()
+    # The number of items visible in badge
     cart_label = driver.find_element(By.CSS_SELECTOR, '.shopping_cart_badge').text
     assert cart_label == '6'
 
@@ -50,7 +58,7 @@ def remove_all():
 
     for item in items:
         product = item.get_property("name")
-        logging.info(product +' removed from the cart')
+        logging.info(product +' has been removed from the cart')
         item.click()
 
 login('standard_user', 'secret_sauce')
