@@ -39,7 +39,7 @@ def add_all():
         product = item.get_property("name")
         logging.info(product + ' added to the cart')
         item.click()
-    cart_label = driver.find_elements(By.CSS_SELECTOR, '.shopping_cart_badge').text
+    cart_label = driver.find_element(By.CSS_SELECTOR, '.shopping_cart_badge').text
     assert cart_label == '6'
 
 # Remove all items in cart
