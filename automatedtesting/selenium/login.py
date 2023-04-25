@@ -30,29 +30,26 @@ def login (user, password):
     driver.find_element(By.CSS_SELECTOR, "input[id='login-button']").click()   
     logging.info('Successfully logged in as ' + user)
 
+# Add all item to cart
 def add_all():
-    # print('INFO: Adding all 6 items to cart')
     logging.info('Adding all 6 items to cart')
-    items = driver.find_element(By.CSS_SELECTOR, "button.btn_primary.btn_inventory")
+    items = driver.find_elements(By.CSS_SELECTOR, "button.btn_primary.btn_inventory")
 
     for item in items:
         product = item.get_property("name")
-        # print('INFO: ' + product + ' added to the cart')
         logging.info(product + ' added to the cart')
         item.click()
-    cart_label = driver.find_element(By.CSS_SELECTOR, '.shopping_cart_badge').text
+    cart_label = driver.find_elements(By.CSS_SELECTOR, '.shopping_cart_badge').text
     assert cart_label == '6'
 
-
+# Remove all items in cart
 def remove_all():
     driver.find_element(By.CSS_SELECTOR, "a[class='shopping_cart_link']").click()
-    # print('INFO: Removing all 6 items to cart')
     logging.info('Removing all 6 items to cart')
-    items = driver.find_element(By.CSS_SELECTOR, "button.cart_button")
+    items = driver.find_elements(By.CSS_SELECTOR, "button.cart_button")
 
     for item in items:
         product = item.get_property("name")
-        # print('INFO: '+ product +' removed from the cart')
         logging.info(product +' removed from the cart')
         item.click()
 
