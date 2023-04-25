@@ -19,24 +19,21 @@ options.add_argument("--disable-extensions")
 options.add_argument('--remote-debugging-port=9999')
 driver = webdriver.Chrome(options=options)
 
-# print ('INFO: Browser started successfully. Navigating to the demo page to login.')
 logging.info('Browser started successfully. Navigating to the demo page to login.')
 driver.get('https://www.saucedemo.com/')
 
 # Start the browser and login with standard_user
 def login (user, password):
-    # print ('INFO: Starting the browser...')
     logging.info('Starting the browser...')
     driver.find_element(By.CSS_SELECTOR, "input[id='user-name']").send_keys(user)
     driver.find_element(By.CSS_SELECTOR, "input[id='password']").send_keys(password)
-    driver.find_element(By.CSS_SELECTOR, "input[id='login-button']").click()
-    # print('INFO: Successfully logged in as ' + user )
+    driver.find_element(By.CSS_SELECTOR, "input[id='login-button']").click()   
     logging.info('Successfully logged in as ' + user)
 
 def add_all():
     # print('INFO: Adding all 6 items to cart')
     logging.info('Adding all 6 items to cart')
-    items = driver.find_elements_by_css_selector("button.btn_primary.btn_inventory")
+    items = driver.find_element(By.CSS_SELECTOR, "button.btn_primary.btn_inventory")
 
     for item in items:
         product = item.get_property("name")
@@ -51,14 +48,13 @@ def remove_all():
     driver.find_element(By.CSS_SELECTOR, "a[class='shopping_cart_link']").click()
     # print('INFO: Removing all 6 items to cart')
     logging.info('Removing all 6 items to cart')
-    items = driver.find_elements_by_css_selector("button.cart_button")
+    items = driver.find_element(By.CSS_SELECTOR, "button.cart_button")
 
     for item in items:
         product = item.get_property("name")
         # print('INFO: '+ product +' removed from the cart')
         logging.info(product +' removed from the cart')
         item.click()
-    
 
 login('standard_user', 'secret_sauce')
 add_all()
