@@ -27,9 +27,9 @@ driver.get('https://www.saucedemo.com/')
 def login (user, password):
     # print ('INFO: Starting the browser...')
     logging.info('Starting the browser...')
-    driver.driver.find_element(By.CSS_SELECTOR, "input[id='user-name']").send_keys(user)
-    driver.driver.find_element(By.CSS_SELECTOR, "input[id='password']").send_keys(password)
-    driver.driver.find_element(By.CSS_SELECTOR, "input[id='login-button']").click()
+    driver.find_element(By.CSS_SELECTOR, "input[id='user-name']").send_keys(user)
+    driver.find_element(By.CSS_SELECTOR, "input[id='password']").send_keys(password)
+    driver.find_element(By.CSS_SELECTOR, "input[id='login-button']").click()
     # print('INFO: Successfully logged in as ' + user )
     logging.info('Successfully logged in as ' + user)
 
@@ -43,12 +43,12 @@ def add_all():
         # print('INFO: ' + product + ' added to the cart')
         logging.info(product + ' added to the cart')
         item.click()
-    cart_label = driver.driver.find_element(By.CSS_SELECTOR, '.shopping_cart_badge').text
+    cart_label = driver.find_element(By.CSS_SELECTOR, '.shopping_cart_badge').text
     assert cart_label == '6'
 
 
 def remove_all():
-    driver.driver.find_element(By.CSS_SELECTOR, "a[class='shopping_cart_link']").click()
+    driver.find_element(By.CSS_SELECTOR, "a[class='shopping_cart_link']").click()
     # print('INFO: Removing all 6 items to cart')
     logging.info('Removing all 6 items to cart')
     items = driver.find_elements_by_css_selector("button.cart_button")
