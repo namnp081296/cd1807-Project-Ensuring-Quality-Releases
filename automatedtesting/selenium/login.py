@@ -8,13 +8,14 @@ import logging
 # Turn off all warning output
 warnings.filterwarnings("ignore", category=DeprecationWarning) 
 
-# Setup output log format
+# Setup output INFO log format
 logging.basicConfig(
     format='%(asctime)s %(levelname)-8s %(message)s',
     level=logging.INFO,
     datefmt='%Y-%m-%d %H:%M:%S')
 
 options = ChromeOptions()
+
 # Will run selenium with non GUI, just output the result log
 options.add_argument("--no-sandbox")
 options.add_argument("--headless") 
@@ -28,13 +29,13 @@ driver = webdriver.Chrome(options=options)
 logging.info('Browser started successfully. Navigating to the demo page to login.')
 driver.get('https://www.saucedemo.com/')
 
-# Start the browser and login with standard_user
+# Login with username "standard_user"
 def login (user, password):
     logging.info('Starting the browser...')
     driver.find_element(By.CSS_SELECTOR, "input[id='user-name']").send_keys(user)
     driver.find_element(By.CSS_SELECTOR, "input[id='password']").send_keys(password)
     driver.find_element(By.CSS_SELECTOR, "input[id='login-button']").click()   
-    logging.info('Successfully logged in as ' + user)
+    logging.info('Logged in with username ' + user)
 
 # Add all item to cart
 def add_all():
@@ -42,11 +43,14 @@ def add_all():
     # Get all element with attribute btn_inventory
     items = driver.find_elements(By.CSS_SELECTOR, "button.btn_primary.btn_inventory")
 
+    # Click Add button
     for item in items:
+        # Get name of product
         product = item.get_property("name")
         logging.info(product + ' has been added to the cart')
         item.click()
-    # The number of items visible in badge
+
+    # Set The number of items visible in badge icon
     cart_label = driver.find_element(By.CSS_SELECTOR, '.shopping_cart_badge').text
     assert cart_label == '6'
 
