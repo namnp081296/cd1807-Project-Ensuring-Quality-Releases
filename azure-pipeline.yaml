@@ -139,7 +139,7 @@ stages:
       inputs:
         # ToDo: Write your commands
         script: |
-          newman run ./ValidationTest.json -r junit,cli -e ./lab3-env.postman_environment.json --reporter-junit-export ./TEST-Validation.xml         
+          newman run ./ValidationTest.json -r junit,cli -e ./lab3-env.postman_environment.json --reporter-junit-export ./Result-Validation.xml         
         workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
 
     # Postman Regression Test Suite    
@@ -150,7 +150,7 @@ stages:
       inputs:
         # ToDo: Write your commands
         script: |
-          newman run ./RegressionTest.json -r junit,cli -e ./lab3-env.postman_environment.json --reporter-junit-export ./TEST-Regression.xml
+          newman run ./RegressionTest.json -r junit,cli -e ./lab3-env.postman_environment.json --reporter-junit-export ./Result-Regression.xml
         workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
 
     # Postman - Publish Results 
@@ -158,7 +158,7 @@ stages:
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'JUnit'
-        testResultsFiles: '**/TEST-*.xml'
+        testResultsFiles: '**/*.xml'
         searchFolder: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
         mergeTestResults: true
         testRunTitle: 'myLab03TestResult'
