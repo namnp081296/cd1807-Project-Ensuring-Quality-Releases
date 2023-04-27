@@ -1,0 +1,21 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1682584477298,1134,GET All Activities,200,OK,Stress Test 1-1,text,true,,3109,185,3,3,https://myapplication-appservice.azurewebsites.net/api/Activities,1134,0,931
+1682584477709,767,GET All Activities,200,OK,Stress Test 1-2,text,true,,3109,185,2,2,https://myapplication-appservice.azurewebsites.net/api/Activities,767,0,571
+1682584478203,745,GET All Activities,200,OK,Stress Test 1-3,text,true,,3109,185,2,2,https://myapplication-appservice.azurewebsites.net/api/Activities,745,0,550
+1682584478699,755,GET All Activities,200,OK,Stress Test 1-4,text,true,,3109,185,2,2,https://myapplication-appservice.azurewebsites.net/api/Activities,755,0,560
+1682584479192,741,GET All Activities,200,OK,Stress Test 1-5,text,true,,3079,185,2,2,https://myapplication-appservice.azurewebsites.net/api/Activities,741,0,548
+1682584479705,747,GET All Activities,200,OK,Stress Test 1-6,text,true,,3109,185,2,2,https://myapplication-appservice.azurewebsites.net/api/Activities,747,0,553
+1682584480202,749,GET All Activities,200,OK,Stress Test 1-7,text,true,,3109,185,2,2,https://myapplication-appservice.azurewebsites.net/api/Activities,749,0,555
+1682584480699,755,GET All Activities,200,OK,Stress Test 1-8,text,true,,3109,185,2,2,https://myapplication-appservice.azurewebsites.net/api/Activities,755,0,559
+1682584481192,749,GET All Activities,200,OK,Stress Test 1-9,text,true,,3109,185,2,2,https://myapplication-appservice.azurewebsites.net/api/Activities,749,0,561
+1682584481702,733,GET All Activities,200,OK,Stress Test 1-10,text,true,,3109,185,2,2,https://myapplication-appservice.azurewebsites.net/api/Activities,733,0,550
+1682584482201,730,GET All Activities,200,OK,Stress Test 1-11,text,true,,3109,185,2,2,https://myapplication-appservice.azurewebsites.net/api/Activities,730,0,546
+1682584482696,745,GET All Activities,200,OK,Stress Test 1-12,text,true,,3109,185,2,2,https://myapplication-appservice.azurewebsites.net/api/Activities,745,0,558
+1682584483191,767,GET All Activities,200,OK,Stress Test 1-13,text,true,,3109,185,2,2,https://myapplication-appservice.azurewebsites.net/api/Activities,767,0,567
+1682584483698,732,GET All Activities,200,OK,Stress Test 1-14,text,true,,3079,185,2,2,https://myapplication-appservice.azurewebsites.net/api/Activities,732,0,549
+1682584484196,771,GET All Activities,200,OK,Stress Test 1-15,text,true,,3109,185,2,2,https://myapplication-appservice.azurewebsites.net/api/Activities,771,0,577
+1682584484694,744,GET All Activities,200,OK,Stress Test 1-16,text,true,,3109,185,2,2,https://myapplication-appservice.azurewebsites.net/api/Activities,744,0,559
+1682584485188,758,GET All Activities,200,OK,Stress Test 1-17,text,true,,3109,185,2,2,https://myapplication-appservice.azurewebsites.net/api/Activities,758,0,563
+1682584485684,739,GET All Activities,200,OK,Stress Test 1-18,text,true,,3109,185,2,2,https://myapplication-appservice.azurewebsites.net/api/Activities,739,0,547
+1682584486194,749,GET All Activities,200,OK,Stress Test 1-19,text,true,,3109,185,2,2,https://myapplication-appservice.azurewebsites.net/api/Activities,749,0,562
+1682584486690,752,GET All Activities,200,OK,Stress Test 1-20,text,true,,3109,185,1,1,https://myapplication-appservice.azurewebsites.net/api/Activities,752,0,563
