@@ -324,9 +324,9 @@ stages:
                 # ToDo: Write commands for deploying the UI Test Suite (published zip artifact) to the linux VM and execute the Test Suite
                 cd $(Pipeline.Workspace)/drop-uitests
                 unzip $(Build.BuildId)-uitests.zip -d $(Build.BuildId)-uitests
-                cd $(Build.BuildId)-uitests
+                
                 # ToDo: Direct the output of the Selenium Test Suite to a log file
-                python3 login.py > seleniumresult.log 2>&1 &
+                python3 $(Build.BuildId)-uitests/login.py > $(Build.BuildId)-uitests/seleniumresult.log 2>&1 &
                 echo "===== CHECK THE OUTPUT LOG ====="
-                cat seleniumresult.log
-                sudo cp seleniumresult.log /var/log/
+                cat $(Build.BuildId)-uitests/seleniumresult.log
+                sudo cp $(Build.BuildId)-uitests/seleniumresult.log /var/log/
