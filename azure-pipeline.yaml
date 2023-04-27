@@ -286,7 +286,7 @@ stages:
     dependsOn: FakeRestAPI
     condition: succeeded()
     pool:
-      vmImage: 'myLinuxVM-image-20230424205216'
+      vmImage: 'myLinuxVM-image-20230428060856'
     environment:
       name: test        # ToDo: Change/provide a name
       resourceType: VirtualMachine
