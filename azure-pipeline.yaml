@@ -45,7 +45,7 @@ stages:
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         backendServiceArm: '$(azureServiceConnectionId)'
         backendAzureRmResourceGroupName: 'Azuredevops'
-        backendAzureRmStorageAccountName: 'tfstate230597197'
+        backendAzureRmStorageAccountName: 'tfstate323668262'
         backendAzureRmContainerName: 'tfstate'
         backendAzureRmKey: 'test.terraform.tfstate'
 
@@ -218,7 +218,7 @@ stages:
   # ToDo: Provide <environment name> you created in your DevOps project
   - deployment: FakeRestAPI
     pool:
-      vmImage: 'myLinuxVM-image-20230427093624'      
+      vmImage: 'myLinuxVM-image-20230427204513'      
     environment: 
       name: test   # ToDo
       resourceType: VirtualMachine
@@ -327,4 +327,6 @@ stages:
                 cd $(Build.BuildId)-uitests
                 # ToDo: Direct the output of the Selenium Test Suite to a log file
                 python3 login.py > seleniumresult.log
+                echo "===== CHECK THE OUTPUT LOG ====="
+                cat seleniumresult.log
                 sudo cp seleniumresult.log /var/log
