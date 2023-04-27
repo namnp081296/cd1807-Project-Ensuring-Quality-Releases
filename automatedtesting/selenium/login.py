@@ -35,11 +35,11 @@ def login (user, password):
     driver.find_element(By.CSS_SELECTOR, "input[id='user-name']").send_keys(user)
     driver.find_element(By.CSS_SELECTOR, "input[id='password']").send_keys(password)
     driver.find_element(By.CSS_SELECTOR, "input[id='login-button']").click()   
-    logging.info('Logged in with username ' + user)
+    logging.info('Logged in with username ' + user + ' succesfully')
 
 # Add all item to cart
 def add_all():
-    logging.info('Adding all 6 items to cart')
+    logging.info('Starting add all 6 items to cart')
     # Get all element with attribute btn_inventory
     items = driver.find_elements(By.CSS_SELECTOR, "button.btn_primary.btn_inventory")
 
@@ -47,7 +47,7 @@ def add_all():
     for item in items:
         # Get name of product
         product = item.get_property("name")
-        logging.info(product + ' has been added to the cart')
+        logging.info('- ' + product + ' has been added to the cart')
         item.click()
 
     # Set The number of items visible in badge icon
@@ -57,12 +57,12 @@ def add_all():
 # Remove all items in cart
 def remove_all():
     driver.find_element(By.CSS_SELECTOR, "a[class='shopping_cart_link']").click()
-    logging.info('Removing all 6 items to cart')
+    logging.info('Starting remove all items in cart')
     items = driver.find_elements(By.CSS_SELECTOR, "button.cart_button")
 
     for item in items:
         product = item.get_property("name")
-        logging.info(product +' has been removed from the cart')
+        logging.info('- ' + product +' has been removed out of the cart')
         item.click()
 
 login('standard_user', 'secret_sauce')
