@@ -45,7 +45,7 @@ stages:
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         backendServiceArm: '$(azureServiceConnectionId)'
         backendAzureRmResourceGroupName: 'Azuredevops'
-        backendAzureRmStorageAccountName: 'tfstate1814129495'
+        backendAzureRmStorageAccountName: 'tfstate1322024809'
         backendAzureRmContainerName: 'tfstate'
         backendAzureRmKey: 'test.terraform.tfstate'
 
@@ -326,7 +326,7 @@ stages:
                 unzip $(Build.BuildId)-uitests.zip -d $(Build.BuildId)-uitests
                 
                 # ToDo: Direct the output of the Selenium Test Suite to a log file
-                python3 $(Build.BuildId)-uitests/login.py >> $(Build.BuildId)-uitests/seleniumresult.log 2>&1 &
+                python3 $(Build.BuildId)-uitests/login.py >> $(Build.BuildId)-uitests/seleniumresult.log
                 echo "===== CHECK THE OUTPUT LOG ====="
                 cat $(Build.BuildId)-uitests/seleniumresult.log
                 sudo cp $(Build.BuildId)-uitests/seleniumresult.log /var/log/
