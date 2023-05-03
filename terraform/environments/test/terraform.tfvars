@@ -1,11 +1,11 @@
 # Azure subscription vars
-subscription_id = "0fadec41-9b39-430f-aa5d-ce7b49f9346c"
+subscription_id = "157081ad-2288-4aa4-b6d0-69f2165b7326"
 tenant_id = "f958e84a-92b8-439f-a62d-4f45996b6d07"
-client_id = "c5194beb-fdf4-42a8-b76e-c7180ccf55b6"
-client_secret = "Px68Q~5ZWFzhtQSOI6H7Sb9PS3Yv3mTSijliSaux"
+client_id = "b99a8ddb-6f49-4b07-a5e8-7598eb0a0238"
+client_secret = "lC88Q~pC54mdIn_UCHvq5Z~vEaIlt1jmn-LqHdfr"
 
 # Resource Group/Location
-location = "West Europe"
+location = "East US"
 resource_group_name = "Azuredevops"
 application_type = "myApplication"
 
